@@ -13,14 +13,28 @@ This tutorial introduces the core Python features needed for the study tasks:
 - Using os for Filesystem Operations
 - Documentation and Man Pages
 
+# Modules Used in This Study
+
+This study primarily uses two Python modules for interacting with the
+operating system:
+
+- `subprocess` — execute Shell commands and connect their input/output.
+- `os` — perform common filesystem and operating-system operations.
+
+Import them using:
+
+```python
+import subprocess
+import os
+```
+
 # 1. Running Shell Commands in Python
 
 Python can execute command-line programs using the `subprocess` module.
 
-import the module and use `subprocess.run()` to execute a simple command:
+Use `subprocess.run()` to execute a simple command:
 
 ```Python
-import subprocess
 subprocess.run(["mkdir", "./results"])
 ```
 
