@@ -14,8 +14,7 @@ To learn the basics of shell commands and Subprocess library, please go through 
 
 [SHELL Tutorial](./tutorial/README-Shell.md)
 
-[Subprocess Tutorial](./tutorial/README-Subprocess.md)  
-[OS Tutorial](./tutorial/README-os.md)
+[Subprocess and OS Tutorial](./tutorial/README-Subprocess-os.md)  
 
 If you have any questions or confusion while going through the tutorial, please feel free to ask for clarification.
 
