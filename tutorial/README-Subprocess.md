@@ -8,9 +8,8 @@ This tutorial introduces the core Python features needed for the study tasks:
 
 - Running Shell Commands in Python
 - Using Shell Output in Python
-- Using Pipes and Redirection
+- More Shell Operators
 - Using Python Output in Shell Commands
-- Using os for Filesystem Operations
 - Documentation and Man Pages
 
 # Modules Used in This Study
