@@ -367,6 +367,195 @@ open("file.txt", "a")
 ```
 appends to the file.
 
+### Mental Model
+
+```
+Shell:
+command | command > file
+
+Python:
+subprocess.PIPE
+       |
+       v
+connect processes
+       |
+       v
+stdout=file
+```
+
+# 4. Using Python Output in Shell
+
+Python values can be passed to Shell commands using `subprocess`. This allows Python code to prepare data and then pass it to command-line tools.
+
+## Python variables as Shell Arguments
+
+A Python variable can be passed as an argument to a Shell command:
+```python
+import subprocess
+
+var = "hi"
+
+subprocess.run(["echo", var])
+```
+
+This is equivalent to running:
+```bash
+echo "hi"
+```
+
+Each argument should be a separate element in the list:
+```python
+subprocess.run(["chmod", "755", filename])
+```
+
+Here:
+
+- "chmod" is the command
+- "755" is an argument
+- filename is a Python variable whose value is passed as another argument
+
+## Python value as Shell Input
+
+Python values can also be passed to a command through its standard input.
+
+For example:
+
+```python
+import subprocess
+
+messages = [
+    "ERROR: database failed",
+    "INFO: server started",
+    "ERROR: timeout"
+]
+
+text = "\n".join(messages)
+
+result = subprocess.run(
+    ["grep", "ERROR"],
+    input=text,
+    capture_output=True,
+    text=True
+)
+```
+
+The Shell receives:
+```text
+ERROR: database failed
+INFO: server started
+ERROR: timeout
+```
+
+and grep produces:
+```
+ERROR: database failed
+ERROR: timeout
+```
+
+## Formatting Python Values
+When passing Python data to a Shell command, it is important to format the data in the way the command expects.
+
+For example, a Python list:
+```python
+messages = [
+    "ERROR: database failed",
+    "ERROR: timeout"
+]
+```
+is not automatically converted into separate lines.
+
+Instead, convert it to text explicitly:
+```python
+text = "\n".join(messages)
+```
+Then pass the resulting string to the command:
+```python
+subprocess.run(
+    ["grep", "ERROR"],
+    input=text,
+    text=True
+)
+```
+
+
+### Mental Model
+
+```
+Python value
+     |
+     v
+Format as text
+     |
+     v
+subprocess
+     |
+     v
+Shell command
+```
+
+Python variables can therefore be used both as Shell command arguments and as input to Shell processes.
+
+
+# 5. Documentation and Man Pages
+
+The subprocess and os modules provide Python interfaces for interacting with the operating system, but many of the commands used in the study are standard Linux commands.
+
+Existing Shell documentation can therefore be used when writing Python programs with subprocess.
+
+For commonly used Linux commands, manual pages (man pages) provide detailed documentation about a command, including its purpose, available flags, arguments, and examples.
+Man pages are available online through websites such as:
+
+- https://man7.org/linux/man-pages/
+- https://manpages.ubuntu.com/
+
+To look up a command, search for the command name on the website.
+
+For example, to learn about the `grep` command:
+
+1. Open the man pages website.
+2. Search for:
+
+```text
+grep
+```
+
+3. Open the manual page for `grep`. (Almost always the first link)
+
+The page describes:
+
+- what the command does
+- the command syntax
+- available flags
+- examples of usage
+
+For example, the documentation shows that the `-r` flag makes `grep` search recursively through directories.
+
+Using this information, we can write:
+
+```bash
+grep -r "ERROR" logs/
+```
+where:  
+- `grep` is the command  
+- `-r` is a flag that changes the search behavior  
+- `"ERROR"` is the text pattern to search for  
+- `logs/` is the directory to search  
+
+The equivalent Python code using subprocess is:
+
+```python
+import subprocess
+
+subprocess.run(
+    ["grep", "-r", "ERROR", "logs/"]
+)
+```
+
+
+
+
+
+
 
 
 
