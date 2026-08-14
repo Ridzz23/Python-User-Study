@@ -12,9 +12,10 @@ For the best experience, open the links below in new tabs using Cmd + Click (or 
 
 To learn the basics of shell commands and Subprocess library, please go through the Subprocess tutorial documentation:
 
-[SHELL Tutorial](./tutorial/README-shell.md)
+[SHELL Tutorial](./tutorial/README-Shell.md)
 
-[Subprocess Tutorial]()
+[Subprocess Tutorial](./tutorial/README-Subprocess.md)
+[OS Tutorial](./tutorial/README-os.md)
 
 If you have any questions or confusion while going through the tutorial, please feel free to ask for clarification.
 
