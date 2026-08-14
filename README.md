@@ -123,7 +123,7 @@ Based on the provided choices, select the option that correctly completes the im
 3. You may use the files here to understand the structure of the environment and code given in `python_template.py`.
 4. Do NOT write or run any code for this task. 
 
-5. For this task please take the quiz: ()
+5. For this task please take the quiz: (https://ucsd.co1.qualtrics.com/jfe/form/SV_2f9k0EhLYBU8jtQ)
 
 > **⚠️ Do not Exit VS Code. Raise your hand and wait for approval from the PI.**
 
