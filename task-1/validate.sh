@@ -13,14 +13,14 @@ else
 fi
 
 # --- Step 2: Run Python Script ---
-PyPepper pepper_template.py
+python3.13 python_template.py
 
 # --- Step 3: Run Validations ---
 echo " "
 echo "Running validations..."
 echo "--------------------------------------------------"
 
-SOLUTION_DIR="../pepper/Checks/outputs/reading_task"
+SOLUTION_DIR="../Python-runtime/Checks/outputs/reading_task"
 OUTPUT_DIR="./outputs"
 ARCHIVE_DIR="./archive"
 

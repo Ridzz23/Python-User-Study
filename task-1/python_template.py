@@ -1,7 +1,6 @@
 import math
 import subprocess
-
-
+import os
 # ---------------- Python Functions ----------------
 
 
@@ -66,7 +65,14 @@ logs = grep_result.stdout.splitlines()
 
 
 # ------------------------ DO NOT CHANGE THESE LINE -----------------------------------------------
-with open("$PYTHON_STUDY/task-1/outputs/logs.txt", "a") as output_file:
+output_path = os.path.join(
+    os.environ["PYTHON_STUDY"],
+    "task-1",
+    "outputs",
+    "logs.txt"
+)
+
+with open(output_path, "a") as output_file:
     for log in logs:
         output_file.write(log + "\n")
 # -------------------------------------------------------------------------------------------------
@@ -135,7 +141,13 @@ sort_result = subprocess.run(
 sorted_report = sort_result.stdout.splitlines()
 
 # ------------------------ DO NOT CHANGE THESE LINE -------------------------------------------------------
-with open("$PYTHON_STUDY/task-1/outputs/sorted_report.txt", "a") as output_file:
+output_path2 = os.path.join(
+    os.environ["PYTHON_STUDY"],
+    "task-1",
+    "outputs",
+    "sorted_report.txt"
+)
+with open(output_path2, "a") as output_file:
     for rep in sorted_report:
         output_file.write(rep + "\n")
 # ----------------------------------------------------------------------------------------------------------

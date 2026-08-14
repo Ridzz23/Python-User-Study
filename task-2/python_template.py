@@ -1,6 +1,7 @@
 import os
 from PIL import Image
 from config import BASE_DIR
+import subprocess
 
 
 # ---------------- Python Functions ----------------
@@ -62,34 +63,39 @@ os.chdir("./images")
 # TODO 2: find all the files that end with .jpg in the images folder
 # and store it in a python List variable called images.
 # Similarly store a list of all the files in the directory in a python variable called all_files.
-#
+# both lists should be sorted in alphabetical/ascending order.
 # Example file path:
 # ./images/example.jpg
 
-images = [
-    os.path.join("./images", file)
-    for file in os.listdir(".")
-    if file.endswith(".jpg")
-]
+images = []
 
-all_files = [
-    os.path.join("./images", file)
-    for file in os.listdir(".")
-]
+all_files = []
 
 # ---------------- DO NOT CHANGE THESE LINES -------------------------------------------------------------------
-with open("$PYTHON_STUDY/task-2/outputs/images.txt", "a") as images_file:
+ouptut_path = os.path.join(
+    os.environ["PYTHON_STUDY"],
+    "task-2",
+    "outputs",
+    "images.txt"
+)
+with open(ouptut_path, "a") as images_file:
     for imag in images:
         images_file.write(imag + "\n")
 
-with open("$PYTHON_STUDY/task-2/outputs/all_files.txt", "a") as all_files_file:
+all_files_path = os.path.join(
+    os.environ["PYTHON_STUDY"],
+    "task-2",
+    "outputs",
+    "all_files.txt"
+)
+with open(all_files_path, "a") as all_files_file:
     for file in all_files:
         all_files_file.write(file + "\n")
 # ---------------------------------------------------------------------------------------------------------------
 
 
-folder_images_path = "./images/"
-folder_filtered_images_path = "./filtered_images/"
+folder_images_path = "./"
+folder_filtered_images_path = "../filtered_images/"
 
 imgs_height_sum = 0
 imgs_width_sum = 0
@@ -124,13 +130,13 @@ else:
     avg_width = 0
 
 report_str = (
-    "'Image Processing Report \n"
+    "Image Processing Report \n"
     "==========================\n"
     "Total files found: %d \n"
     "Image files processed: %d \n"
     "Files skipped: %d \n"
     "Average image width: %.2f \n"
-    "Average image height: %.2f\n'"
+    "Average image height: %.2f\n"
 ) % (
     tot_files,
     num_img_files_processed,

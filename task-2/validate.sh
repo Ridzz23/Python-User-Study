@@ -13,14 +13,14 @@ else
 fi
 
 # --- Step 2: Run Python Script ---
-PyPepper pepper_template.py
+python3.13 python_template.py
 
 echo " "
 echo "Running validations..."
 echo "--------------------------------------------------"
 
 # Define paths
-SOLUTION_DIR="../pepper/Checks/outputs/coding_task"
+SOLUTION_DIR="../Python-runtime/Checks/outputs/coding_task"
 OUTPUT_DIR="./outputs"
 FILTERED_DIR="./filtered_images"
 
@@ -54,8 +54,10 @@ else
     echo "[FAIL] TODO 2: Missing 'outputs/images.txt' for comparison."
 fi
 
-if [ -f "$OUTPUT_DIR/all_files.txt" ] && [ -f "$SOLUTION_DIR/all_files.txt" ]; then
-    if diff -b -B -u "$OUTPUT_DIR/all_files.txt" "$SOLUTION_DIR/all_files.txt" > /dev/null; then
+if [ -f "$OUTPUT_DIR/all_files.txt" ] && [ -f "$SOLUTION_DIR/all_files1.txt" ] && [ -f "$SOLUTION_DIR/all_files2.txt" ]; then
+    if diff -b -B -u "$OUTPUT_DIR/all_files.txt" "$SOLUTION_DIR/all_files1.txt" > /dev/null; then
+        echo "[PASS] TODO 2: 'all_files.txt' matches solution exactly."
+    elif diff -b -B -u "$OUTPUT_DIR/all_files.txt" "$SOLUTION_DIR/all_files2.txt" > /dev/null; then
         echo "[PASS] TODO 2: 'all_files.txt' matches solution exactly."
     else
         echo "[FAIL] TODO 2: 'all_files.txt' differs from solution."
