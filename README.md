@@ -51,15 +51,15 @@ Once you have completed the tutorial, take the Subprocess quiz to test your unde
 ```
 This will automatically run your script and validate it. 
 
-8. If you want to run only your script you would run this in the command line:
+8. If you want to run only your script you would run this in the command line (please use this specific version of Python only):
 
 ```bash
-PyPepper <file_name>
+python3.13 <file_name>
 ```
 
 For example:
 ```bash
-PyPepper pepper_template.py
+python3.13 pepper_template.py
 ```
 This is optional and not required. For the most part you would run the validate script to check your code.
 
