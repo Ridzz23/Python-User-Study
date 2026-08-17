@@ -20,7 +20,7 @@ If you have any questions or confusion while going through the tutorial, please 
 
 Once you have completed the tutorial, take the Subprocess quiz to test your understanding:
 
-[Subprocess Quiz]()
+[Subprocess Quiz](https://ucsd.co1.qualtrics.com/jfe/form/SV_cZba1J2YMxWeJVk)
 
 > **⚠️ Important:** After completing the quiz, please raise your hand and wait for a PI to come and check your quiz before continuing.
 
