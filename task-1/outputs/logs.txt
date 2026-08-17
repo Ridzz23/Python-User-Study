@@ -1,8 +1,0 @@
-./logs/prod-web2.log:ERROR server=prod-web2 latency=400
-./logs/dev-api1.log:ERROR server=dev-api1 latency=9000
-./logs/prod-web1.log:ERROR server=prod-web1 latency=800
-./logs/prod-web1.log:ERROR server=prod-web1 latency=2000
-./logs/prod-api1.log:ERROR server=prod-api1 latency=5000
-./logs/prod-api1.log:ERROR server=prod-api1 latency=26000
-./logs/test-db1.log:ERROR server=test-db1 latency=12000
-./logs/prod-db1.log:ERROR server=prod-db1 latency=15000

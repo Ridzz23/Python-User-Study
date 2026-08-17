@@ -56,9 +56,9 @@ def heat_map(folder_in, folder_out, img_name):
 
 # TODO 1: create a new directory called filtered_images. 
 # This directory should be located within the task-2 directory and outside the images directory.
+subprocess.run(["mkdir", "./filtered_images"])
 
 os.chdir("./images")
-
 
 # TODO 2: find all the files that end with .jpg in the images folder
 # and store it in a python List variable called images.
@@ -67,9 +67,18 @@ os.chdir("./images")
 # Example file path:
 # ./images/example.jpg
 
-images = []
+result = subprocess.run(
+    ["ls"],
+    capture_output=True,
+    text=True
+    )
 
-all_files = []
+all_files = result.stdout.splitlines()
+
+images = []
+for f in all_files:
+    if f.endswith(".jpg"):
+        images.append(f)
 
 # ---------------- DO NOT CHANGE THESE LINES -------------------------------------------------------------------
 ouptut_path = os.path.join(
@@ -118,7 +127,7 @@ for img in images:
 # and should be in the given outputs folder.
 
 
-tot_files = 0  # TODO
+tot_files = len(all_files)  # TODO
 
 skipped = tot_files - num_img_files_processed
 
@@ -144,3 +153,12 @@ report_str = (
     avg_width,
     avg_height,
 )
+
+os.chdir("..")
+os.chdir("outputs")
+with open("report.txt", "w") as f:
+    subprocess.run(
+        ["echo", report_str],
+        stdout=f,
+        check=True
+    )
