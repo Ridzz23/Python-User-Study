@@ -108,7 +108,7 @@ To change the Python program's working directory, use os.chdir() instead:
 
 ```python
 import os
-os.chdir("..")
+os.chdir("<folder-name>")
 ```
 
 For commands whose output you do not need to process in Python, you can simply execute them with subprocess.run():
@@ -253,24 +253,22 @@ For example:
 cat data.txt | grep ERROR
 ```
 
-with `subprocess`, use `subprocess.PIPE` to connect the commands:
+with `subprocess`, use the input field and `.stdout` to pass data along the pipe: 
 ```python
 import subprocess
 
-cat = subprocess.Popen(
+cat = subprocess.run(
     ["cat", "data.txt"],
-    stdout=subprocess.PIPE,
+    capture_output=True,
     text=True
 )
 
 grep = subprocess.run(
     ["grep", "ERROR"],
-    stdin=cat.stdout,
+    input=cat.stdout,
     capture_output=True,
     text=True
 )
-
-cat.stdout.close()
 
 errors = grep.stdout
 ```
@@ -287,28 +285,25 @@ can be written as:
 ```python
 import subprocess
 
-cat = subprocess.Popen(
+cat = subprocess.run(
     ["cat", "server.log"],
     stdout=subprocess.PIPE,
     text=True
 )
 
-grep = subprocess.Popen(
+grep = subprocess.run(
     ["grep", "WARNING"],
-    stdin=cat.stdout,
+    input=cat.stdout,
     stdout=subprocess.PIPE,
     text=True
 )
 
 sort = subprocess.run(
     ["sort"],
-    stdin=grep.stdout,
+    input=grep.stdout,
     capture_output=True,
     text=True
 )
-
-cat.stdout.close()
-grep.stdout.close()
 
 warnings = sort.stdout
 ```
@@ -348,6 +343,7 @@ with open("files.txt", "w") as f:
 ```
 
 This runs ls and writes its output to files.txt.
+If file.txt does not exist then this creates the file first. 
 
 ## Append Redirection
 
@@ -563,59 +559,4 @@ subprocess.run(
     ["grep", "-r", "ERROR", "logs/"]
 )
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
