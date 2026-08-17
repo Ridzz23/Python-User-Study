@@ -108,7 +108,7 @@ To change the Python program's working directory, use os.chdir() instead:
 
 ```python
 import os
-os.chdir("..")
+os.chdir("<folder-name>")
 ```
 
 For commands whose output you do not need to process in Python, you can simply execute them with subprocess.run():
