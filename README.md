@@ -63,6 +63,25 @@ python3.13 pepper_template.py
 ```
 This is optional and not required. For the most part you would run the validate script to check your code.
 
+You can navigate to a folder by running the following command in the command line:
+
+```bash
+cd <folder-name>
+```
+
+For example if you are currently within `Python-User-Study` then you can navigate to folder `task-1` using:
+```bash
+cd task-1
+```
+
+Then, you can navigate out of a folder using:
+```bash
+cd ..
+```
+
+So, if you are in `task-1` and you run `cd ..` on the command line then your directory will change to the parent directory `Python-User-Study`.
+
+
 ---
 
 # Task 1 - Servers
