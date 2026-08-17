@@ -370,7 +370,7 @@ with open("errors.txt", "a") as f:
 
 The important difference is the file mode:
 ```python
-The important difference is the file mode:
+open("file.txt", "w")
 ```
 overwrites the file.
 
