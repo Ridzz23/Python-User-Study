@@ -37,9 +37,11 @@ Once you have completed the tutorial, take the Subprocess quiz to test your unde
 # General Task Instructions
 
 1. Task specific documentation has been provided in `README-Docs.md` in each task folder.
-2. You are also free to refer to anythink within these sites:
+2. You are also free to refer to anything within these sites:
     - Linux man pages: https://man7.org/linux/man-pages/
-    - Python 3.13 Docs: https://docs.python.org/3.13/ 
+    - Python 3.13 Docs: https://docs.python.org/3.13/
+    - Subprocess Docs: https://docs.python.org/3/library/subprocess.html
+    - OS Docs: https://docs.python.org/3/library/os.html 
 3. Please DO NOT google search anything else
 4. Please DO NOT use AI or LLMs to complete the tasks.
 5. If you encounter an issue or are unsure about anything, raise your hand and wait for assistance.
