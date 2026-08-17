@@ -55,13 +55,20 @@ logs_as_args = " ".join(log_files)
 
 
 grep_result = subprocess.run(
-    ["grep", "ERROR", *log_files],
+    ["grep", "WARNING", *log_files],
     capture_output=True,
     text=True,
     check=False
 )
 
-logs = grep_result.stdout.splitlines()
+prod_lines = subprocess.run(
+    ["grep", "server=prod"],
+    capture_output=True,
+    text=True,
+    input=grep_result.stdout
+)
+
+logs = prod_lines.stdout.splitlines()
 
 
 # ------------------------ DO NOT CHANGE THESE LINE -----------------------------------------------
@@ -152,6 +159,22 @@ with open(output_path2, "a") as output_file:
         output_file.write(rep + "\n")
 # ----------------------------------------------------------------------------------------------------------
 
+subprocess.run(
+    ["mkdir", "archive"]
+)
+
+txts = subprocess.run(
+    ["find", "./outputs", "-name", "*.txt"],
+    capture_output=True,
+    text=True,
+    check=True
+)
+
+for txt in txts.stdout.splitlines():
+    print(txt)
+    subprocess.run(
+        ["mv", txt, "./archive"]
+    )
 
 # TODO 3: The operations team wants generated reports organized.
 # Create a directory called archive/
