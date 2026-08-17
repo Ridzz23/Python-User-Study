@@ -253,24 +253,22 @@ For example:
 cat data.txt | grep ERROR
 ```
 
-with `subprocess`, use `subprocess.PIPE` to connect the commands:
+with `subprocess`, use the input field and `.stdout` to pass data along the pipe: 
 ```python
 import subprocess
 
-cat = subprocess.Popen(
+cat = subprocess.run(
     ["cat", "data.txt"],
-    stdout=subprocess.PIPE,
+    capture_output=True,
     text=True
 )
 
 grep = subprocess.run(
     ["grep", "ERROR"],
-    stdin=cat.stdout,
+    input=cat.stdout,
     capture_output=True,
     text=True
 )
-
-cat.stdout.close()
 
 errors = grep.stdout
 ```
@@ -287,28 +285,25 @@ can be written as:
 ```python
 import subprocess
 
-cat = subprocess.Popen(
+cat = subprocess.run(
     ["cat", "server.log"],
     stdout=subprocess.PIPE,
     text=True
 )
 
-grep = subprocess.Popen(
+grep = subprocess.run(
     ["grep", "WARNING"],
-    stdin=cat.stdout,
+    input=cat.stdout,
     stdout=subprocess.PIPE,
     text=True
 )
 
 sort = subprocess.run(
     ["sort"],
-    stdin=grep.stdout,
+    input=grep.stdout,
     capture_output=True,
     text=True
 )
-
-cat.stdout.close()
-grep.stdout.close()
 
 warnings = sort.stdout
 ```
