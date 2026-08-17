@@ -343,6 +343,7 @@ with open("files.txt", "w") as f:
 ```
 
 This runs ls and writes its output to files.txt.
+If file.txt does not exist then this creates the file first. 
 
 ## Append Redirection
 
