@@ -65,7 +65,7 @@ os.chdir("./images")
 # Similarly store a list of all the files in the directory in a python variable called all_files.
 # both lists should be sorted in alphabetical/ascending order.
 # Example file path:
-# ./images/example.jpg
+# ./example.jpg
 
 images = []
 
