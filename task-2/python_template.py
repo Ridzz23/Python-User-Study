@@ -61,10 +61,10 @@ os.chdir("./images")
 
 # TODO 2: find all the files that end with .jpg in the images folder
 # and store it in a python List variable called images.
-# Similarly store a list of all the files in the directory in a python variable called all_files.
-# both lists should be sorted in alphabetical/ascending order.
+# Similarly store a list of all the files in the images directory in a python variable called all_files.
+#
 # Example file path:
-# ./example.jpg
+# ./example.jpg or example.jpg
 
 images = []
 
