@@ -56,7 +56,6 @@ def heat_map(folder_in, folder_out, img_name):
 
 # TODO 1: create a new directory called filtered_images. 
 # This directory should be located within the task-2 directory and outside the images directory.
-
 os.chdir("./images")
 
 
@@ -72,6 +71,9 @@ images = []
 all_files = []
 
 # ---------------- DO NOT CHANGE THESE LINES -------------------------------------------------------------------
+images.sort()
+all_files.sort()
+
 ouptut_path = os.path.join(
     os.environ["PYTHON_STUDY"],
     "task-2",
