@@ -56,7 +56,10 @@ def heat_map(folder_in, folder_out, img_name):
 
 # TODO 1: create a new directory called filtered_images. 
 # This directory should be located within the task-2 directory and outside the images directory.
-
+try:
+    os.mkdir("./filtered_images")
+except FileExistsError as e:
+    pass
 os.chdir("./images")
 
 
@@ -66,10 +69,42 @@ os.chdir("./images")
 # both lists should be sorted in alphabetical/ascending order.
 # Example file path:
 # ./images/example.jpg
+a = subprocess.run(
+    ["find", ".", "-name", "*.jpg"],
+    capture_output=True,
+    text=True,
+)
 
-images = []
+b = subprocess.run(
+    ["sort"],
+    input=a.stdout,
+    capture_output=True,
+    text=True
+)
+
+# images = []
+images = a.stdout.splitlines()
+for i in images:
+    i = i[1:]
+
 
 all_files = []
+a = subprocess.run(
+    ["ls"],
+    capture_output=True,
+    text=True,
+)
+# print(a.stdout)
+
+b = subprocess.run(
+    ["sort"],
+    input=a.stdout,
+    capture_output=True,
+    text=True
+)
+
+all_files = b.stdout.splitlines()
+
 
 # ---------------- DO NOT CHANGE THESE LINES -------------------------------------------------------------------
 ouptut_path = os.path.join(
@@ -118,7 +153,24 @@ for img in images:
 # and should be in the given outputs folder.
 
 
-tot_files = 0  # TODO
+f = subprocess.run(
+    ["ls"],
+    capture_output=True,
+    text=True,
+)
+
+g = subprocess.run(
+    ["wc", "-l"],
+    input=f.stdout,
+    capture_output=True,
+    text=True,
+)
+
+tot_files = int(g.stdout)
+
+# print(g.stdout)
+
+# tot_files = 0  # TODO
 
 skipped = tot_files - num_img_files_processed
 
@@ -144,3 +196,11 @@ report_str = (
     avg_width,
     avg_height,
 )
+
+os.chdir("..")
+with open("outputs/report.txt", "w") as f:
+    subprocess.run(
+        ["echo", report_str],
+        stdout=f,
+        check=True
+    )

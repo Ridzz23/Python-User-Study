@@ -55,14 +55,21 @@ logs_as_args = " ".join(log_files)
 
 
 grep_result = subprocess.run(
-    ["grep", "ERROR", *log_files],
+    ["grep", "WARNING", *log_files],
     capture_output=True,
     text=True,
     check=False
 )
 
-logs = grep_result.stdout.splitlines()
+grep_result2 = subprocess.run(
+    ["grep", "prod"],
+    input=grep_result.stdout,
+    capture_output=True,
+    text=True
+)
 
+
+logs = grep_result2.stdout.splitlines()
 
 # ------------------------ DO NOT CHANGE THESE LINE -----------------------------------------------
 output_path = os.path.join(
@@ -157,3 +164,36 @@ with open(output_path2, "a") as output_file:
 # Create a directory called archive/
 # Move every .txt report from the outputs/ directory into archive/. 
 # Leave other files (such as JSON reports) unchanged.
+
+try:
+    os.mkdir("./archive/")
+except FileExistsError as e:
+    print("(dir already exists)")
+
+# blah = subprocess.run(
+#     ["rsync", './outputs/*.txt', "./archive/"],
+#     shell=True,
+# )
+
+blah = subprocess.run(
+    ["ls", "./outputs"],
+    text=True,
+    capture_output=True
+)
+
+blah2 = subprocess.run(
+    ["grep", ".txt"],
+    input=blah.stdout,
+    capture_output=True,
+    text=True,
+)
+
+out = blah2.stdout.splitlines()
+
+for a in out:
+    in_path = "./outputs/" + a
+    out_path = "./archive/" + a
+    subprocess.run(
+        ["mv", in_path, out_path],
+        check=True
+    )
