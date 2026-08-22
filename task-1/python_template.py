@@ -40,10 +40,24 @@ def classify(score):
 
 
 find_result = subprocess.run(
-    ["find", "./logs", "-name", "*.log"],
+    ["find", "./logs", "-name", "*.log"],  
     capture_output=True,
     text=True,
     check=True
+)
+
+grep_result = subprocess.run(
+    ["grep", "WARNING", *log_files],
+    capture_output=True,
+    text=True,
+    check=False
+)
+
+grep_prod = subprocess.run(
+    ["grep", "server=prod"],
+    input=grep_result.stdout,
+    text=True,
+    check=False
 )
 
 log_files = find_result.stdout.splitlines()
@@ -53,15 +67,7 @@ logs_as_args = " ".join(log_files)
 
 # Extracts ERROR log entries
 
-
-grep_result = subprocess.run(
-    ["grep", "ERROR", *log_files],
-    capture_output=True,
-    text=True,
-    check=False
-)
-
-logs = grep_result.stdout.splitlines()
+logs = grep_prod.stdout.splitlines()
 
 
 # ------------------------ DO NOT CHANGE THESE LINE -----------------------------------------------
@@ -157,3 +163,9 @@ with open(output_path2, "a") as output_file:
 # Create a directory called archive/
 # Move every .txt report from the outputs/ directory into archive/. 
 # Leave other files (such as JSON reports) unchanged.
+#subprocess.run(["mkdir", "./archive/"]) didnt work 
+#mdkir [./archive]
+#mdkir (./archive/) nope not running in terminal 
+#mdkir {archive/}
+subprocess.run(["mkdir", "./archive"])
+mv ['.txt'] -t ./archive
