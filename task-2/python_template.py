@@ -56,8 +56,19 @@ def heat_map(folder_in, folder_out, img_name):
 
 # TODO 1: create a new directory called filtered_images. 
 # This directory should be located within the task-2 directory and outside the images directory.
-os.chdir("./images")
 
+import subprocess 
+
+result_one = subprocess.run(
+    ["mkdir", "./filtered_images"],
+    capture_output = True,
+    text = True,
+    check = True
+)
+
+store_result = result_one.stdout.splitlines()
+
+os.chdir("./images")
 
 # TODO 2: find all the files that end with .jpg in the images folder
 # and store it in a python List variable called images.
@@ -65,10 +76,27 @@ os.chdir("./images")
 #
 # Example file path:
 # ./example.jpg or example.jpg
-
 images = []
 
 all_files = []
+
+result_one = subprocess.run(
+    ["find", ".", "-name", "*.jpg"],
+    capture_output = True,
+    text = True,
+    check = True
+)
+
+images = result_one.stdout.splitlines()
+
+result_two = subprocess.run(
+    ["ls"],
+    capture_output = True,
+    text = True,
+    check = True
+)
+
+all_files = result_two.stdout.splitlines()
 
 # ---------------- DO NOT CHANGE THESE LINES -------------------------------------------------------------------
 images.sort()
@@ -94,7 +122,6 @@ with open(all_files_path, "a") as all_files_file:
     for file in all_files:
         all_files_file.write(file + "\n")
 # ---------------------------------------------------------------------------------------------------------------
-
 
 folder_images_path = "./"
 folder_filtered_images_path = "../filtered_images/"
@@ -146,3 +173,14 @@ report_str = (
     avg_width,
     avg_height,
 )
+
+os.chdir("./outputs")
+
+result_three = subprocess.run(
+    ["", "report_str"],
+    capture_output = True,
+    text = True,
+    check = True
+)
+
+report.txt = result_three.stdout.splitlines()

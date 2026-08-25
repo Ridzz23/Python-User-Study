@@ -35,9 +35,9 @@ def classify(score):
 # Production servers contain the keyword server=prod such as: 
 # server=prod-db1.
 
+import subprocess 
 
 # Find log files
-
 
 find_result = subprocess.run(
     ["find", "./logs", "-name", "*.log"],
@@ -48,21 +48,29 @@ find_result = subprocess.run(
 
 log_files = find_result.stdout.splitlines()
 
-logs_as_args = " ".join(log_files)
+logs_as_args = "\n".join(log_files)
 
 
 # Extracts ERROR log entries
 
-
 grep_result = subprocess.run(
-    ["grep", "ERROR", *log_files],
+    ["grep", "WARNING", *log_files],
     capture_output=True,
     text=True,
-    check=False
+    check=True
 )
 
 logs = grep_result.stdout.splitlines()
 
+sort_logs = subprocess.run(
+      ["grep", "server=prod"],
+      input=grep_result.stdout,
+      capture_output=True,
+      text=True,
+      check=True
+    )
+
+logs = sort_logs.stdout.splitlines()
 
 # ------------------------ DO NOT CHANGE THESE LINE -----------------------------------------------
 output_path = os.path.join(
@@ -80,8 +88,8 @@ with open(output_path, "a") as output_file:
 
 # Parse shell output
 
-
 incidents = []
+
 
 for line in logs:
 
@@ -157,3 +165,30 @@ with open(output_path2, "a") as output_file:
 # Create a directory called archive/
 # Move every .txt report from the outputs/ directory into archive/. 
 # Leave other files (such as JSON reports) unchanged.
+
+result_one = subprocess.run(
+    ["mkdir", "./archive"],
+    capture_output = True,
+    text = True,
+    check = True
+)
+
+store_one = result_one.stdout.splitlines()
+
+result_two = subprocess.run(
+    ["find", "./outputs",  "-name", "*.txt"],
+    capture_output = True,
+    text = True,
+    check = True
+)
+
+store_two = result_two.stdout.splitlines()
+
+result_three = subprocess.run(
+    ["mv", "./outputs/logs.txt", "./archive"],
+    capture_output = True,
+    text = True,
+    check = True
+)
+
+store_three = result_three.stdout.splitlines()
