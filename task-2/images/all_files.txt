@@ -17,4 +17,3 @@ object_15.jpg
 object_16.jpg
 object_17.jpg
 object_18.png
-report.txt
