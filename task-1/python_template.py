@@ -51,17 +51,24 @@ log_files = find_result.stdout.splitlines()
 logs_as_args = " ".join(log_files)
 
 
-# Extracts ERROR log entries
-
+# Extracts log entries
 
 grep_result = subprocess.run(
-    ["grep", "ERROR", *log_files],
+    ["grep", "WARNING", *log_files],
     capture_output=True,
     text=True,
     check=False
 )
 
-logs = grep_result.stdout.splitlines()
+filter_result = subprocess.run(
+    ['grep', 'server=prod'],
+    input=grep_result.stdout,
+    capture_output=True,
+    text=True,
+    check=True
+)
+
+logs = filter_result.stdout.splitlines()
 
 
 # ------------------------ DO NOT CHANGE THESE LINE -----------------------------------------------
@@ -154,6 +161,26 @@ with open(output_path2, "a") as output_file:
 
 
 # TODO 3: The operations team wants generated reports organized.
+
 # Create a directory called archive/
+os.mkdir('archive')
+
 # Move every .txt report from the outputs/ directory into archive/. 
+
+# Get each *.txt file
+find_result = subprocess.run(
+    ["find", "./outputs", "-name", "*.txt"],
+    capture_output=True,
+    text=True,
+    check=True
+)
+
+files = find_result.stdout.splitlines()
+
+for file in files:
+    subprocess.run(
+        ["mv", file, "./archive"],
+        check=True
+    )
+
 # Leave other files (such as JSON reports) unchanged.
