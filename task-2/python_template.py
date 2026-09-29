@@ -56,6 +56,8 @@ def heat_map(folder_in, folder_out, img_name):
 
 # TODO 1: create a new directory called filtered_images. 
 # This directory should be located within the task-2 directory and outside the images directory.
+subprocess.run(["mkdir", "./filtered_images"])
+
 os.chdir("./images")
 
 
@@ -67,8 +69,24 @@ os.chdir("./images")
 # ./example.jpg or example.jpg
 
 images = []
+find_result = subprocess.run(
+    ["find", ".", "-name", "*.jpg"],
+    capture_output=True,
+    text=True,
+    check=True
+)
+images = find_result.stdout.splitlines()
+
+
 
 all_files = []
+find_result_2 = subprocess.run(
+    ["ls"],
+    capture_output=True,
+    text=True,
+    check=True
+)
+all_files = find_result_2.stdout.splitlines()
 
 # ---------------- DO NOT CHANGE THESE LINES -------------------------------------------------------------------
 images.sort()
@@ -120,7 +138,11 @@ for img in images:
 # and should be in the given outputs folder.
 
 
-tot_files = 0  # TODO
+count = 0
+for files in all_files: 
+    count+=1
+tot_files = count
+ # TODO
 
 skipped = tot_files - num_img_files_processed
 
@@ -146,3 +168,7 @@ report_str = (
     avg_width,
     avg_height,
 )
+os.chdir("../outputs")
+
+with open("report.txt", "a") as f:
+    subprocess.run(["echo", report_str], stdout=f, check=True)
