@@ -55,13 +55,24 @@ logs_as_args = " ".join(log_files)
 
 
 grep_result = subprocess.run(
-    ["grep", "ERROR", *log_files],
+    ["grep", "WARNING", *log_files],
     capture_output=True,
     text=True,
     check=False
 )
 
 logs = grep_result.stdout.splitlines()
+
+
+l = []
+for i in range(len(logs)):
+    if "server=prod"  in logs[i] :
+        l.append(logs[i])
+logs = l
+    
+
+
+
 
 
 # ------------------------ DO NOT CHANGE THESE LINE -----------------------------------------------
@@ -157,3 +168,8 @@ with open(output_path2, "a") as output_file:
 # Create a directory called archive/
 # Move every .txt report from the outputs/ directory into archive/. 
 # Leave other files (such as JSON reports) unchanged.
+
+subprocess.run(["mkdir", "archive/"])
+result = subprocess.run(["ls", "outputs/"], capture_output= True)
+subprocess.run(["mv","./outputs/logs.txt","archive/"])
+subprocess.run(["mv","./outputs/sorted_report.txt","archive/"])
